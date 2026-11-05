@@ -1,0 +1,17 @@
+LENCO — GITHUB PAGES KURULUMU
+
+1. ZIP dosyasını bilgisayarında aç.
+2. İçindeki index.html, catalogue.css, catalogue.js, products.json, assets klasörü ve .nojekyll dosyasını GitHub deposunun ana dizinine yükle. ZIP dosyasının kendisini yükleme.
+3. GitHub deposunda Settings > Pages > Deploy from a branch seç.
+4. Branch: main / Folder: / (root) seçip Save düğmesine bas.
+5. Yayın işlemi tamamlanınca GitHub Pages bağlantını aç.
+
+Build veya npm kurulumu gerekmez. Dosya yolları depo alt dizinleriyle uyumludur.
+Sayfayı dosyaya çift tıklayarak değil, GitHub Pages üzerinde aç: ürün listesi fetch ile yüklenir.
+Three.js, GSAP, Lenis, OGL ve Google Fonts internet bağlantısı gerektirir.
+WebGL destekleyen güncel tarayıcı gerekir. Bu oturumda 3D görsel kontrolü yapılmadı.
+71 ürün ve Eylül 2026 fiyatları korunmuştur. Ödeme altyapısı yoktur.
+3D sahne temsilidir. Teknik anlatım LBT-188WA modeline aittir; tüm modellere genellenmez.
+
+TEKNİK BİLGİ KAYNAĞI
+https://www.lenco.com/en/products/lenco-lbt-188wa-platenspeler-met-bluetooth-transmissie-donker-bruin
