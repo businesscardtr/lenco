@@ -602,7 +602,7 @@ body.ready #rail{opacity:1}
   <div class="stage">
     <p class="k side-k"><span class="l"><span>02 — Plaklar</span></span></p>
     <div class="rec-head rv">
-      <p class="k"><span class="l" style="--i:0"><span>Analog seçki · on plak<span class="x"> interaktif demo</span></span></span></p>
+      <p class="k"><span class="l" style="--i:0"><span>Bill Evans · Peace Piece<span class="x"> · sürekli tekrar</span></span></span></p>
       <h2 class="disp h-m"><span class="l" style="--i:1"><span>Bir plak seç.</span></span></h2>
     </div>
     <p class="k rec-count" aria-hidden="true"><span id="recIdx">01</span><span class="dim"> / 10</span></p>
@@ -612,9 +612,9 @@ body.ready #rail{opacity:1}
     <div class="rec-info">
       <button class="rec-arrow magnetic" id="recPrev" type="button" aria-label="Previous record">←</button>
       <div class="rec-meta" id="recMeta">
-        <p class="disp rec-title l" style="--i:0"><span id="recTitle">Sideboard Music</span></p>
-        <p class="body rec-artist l" style="--i:1"><span id="recArtist">The Jura Quartet</span></p>
-        <p class="k dim rec-cat l" style="--i:2"><span id="recCat">RP-01 · 2026 · side A 19:40</span></p>
+        <p class="disp rec-title l" style="--i:0"><span id="recTitle">Peace Piece</span></p>
+        <p class="body rec-artist l" style="--i:1"><span id="recArtist">Bill Evans</span></p>
+        <p class="k dim rec-cat l" style="--i:2"><span id="recCat">RP-01 · Peace Piece · 06:45</span></p>
       </div>
       <button class="rec-arrow magnetic" id="recNext" type="button" aria-label="Next record">→</button>
     </div>
@@ -625,8 +625,8 @@ body.ready #rail{opacity:1}
     <div class="rec-now" id="recNow" aria-live="polite">
       <div class="rec-now-meta">
         <p class="k"><span class="eq" aria-hidden="true"><b></b><b></b><b></b><b></b></span><span id="recNowState">Dropping the needle</span></p>
-        <p class="disp rec-now-title" id="recNowTitle">Sideboard Music</p>
-        <p class="body rec-now-artist" id="recNowArtist">The Jura Quartet</p>
+        <p class="disp rec-now-title" id="recNowTitle">Peace Piece</p>
+        <p class="body rec-now-artist" id="recNowArtist">Bill Evans</p>
       </div>
       <div class="rec-now-ctl">
         <button id="recNowPlay" class="pill ghost rd-control" type="button"><span class="rd-copy"><span class="t">Stop</span></span><span class="rd-hardware" aria-hidden="true"><span class="rd-bezel"></span><span class="rd-glass"><span class="rd-vinyl"></span><span class="rd-arm"></span><span class="rd-led"></span><span class="rd-contact"></span></span></span></button>
@@ -1313,7 +1313,7 @@ const ART = {
 };
 const LABEL_ART = { label_a: 'assets/asset-01.jpg', label_b: 'assets/asset-02.jpg', label_c: 'assets/asset-03.jpg', label_d: 'assets/asset-04.jpg', label_e: 'assets/asset-05.jpg', label_f: 'assets/asset-06.jpg', label_wood: 'assets/asset-07.jpg' };
 const RECORDS = [
-  { cat: 'RP-01', title: 'Sideboard Music', artist: 'The Jura Quartet', year: 2026, side: '19:40', art: 'label_e', bg: '#1a1410', ink: '#f3ece1', dark: true, music: { bpm: 74 } },
+  { cat: 'RP-01', title: 'Peace Piece', artist: 'Bill Evans', year: 2026, side: '19:40', art: 'label_e', bg: '#1a1410', ink: '#f3ece1', dark: true, music: { bpm: 74 } },
   { cat: 'RP-02', title: 'Thirty-Three and a Third', artist: 'Noor Haddad', year: 2026, side: '21:12', art: 'label_b', bg: '#e9dfc9', ink: '#17120e', music: { bpm: 66, transpose: -3, swing: 0.07, chords: CHORDS.dorian, melody: MELODY.low, epCut: 3200, tremRate: 3.4, rev: 0.42, dly: 0.35, kit: 0.55 } },
   { cat: 'RP-03', title: 'Night Bus to Gent', artist: 'Lamp & Motor', year: 2025, side: '22:04', art: 'label_a', bg: '#0b1020', ink: '#f3ece1', dark: true, music: { bpm: 84, transpose: 2, swing: 0.12, chords: CHORDS.soul, melody: MELODY.busy, epCut: 5200, tremRate: 5.6, rev: 0.25, dly: 0.6, kit: 1.0 } },
   { cat: 'RP-04', title: 'Oiled, Not Lacquered', artist: 'Ines Rauch', year: 2026, side: '18:25', art: 'label_wood', bg: '#2a1a10', ink: '#f3ece1', dark: true, music: { bpm: 70, transpose: -5, swing: 0.05, chords: CHORDS.vamp, epCut: 2800, tremRate: 2.8, rev: 0.5, dly: 0.3, kit: 0.4, vib: 0.3 } },
@@ -1324,6 +1324,8 @@ const RECORDS = [
   { cat: 'RP-09', title: 'No Firmware', artist: 'The Analogue Committee', year: 2025, side: '17:55', art: 'label_c', bg: '#e8e2d4', ink: '#17120e', music: { bpm: 96, transpose: 5, swing: 0.14, melody: MELODY.busy, epCut: 5600, tremRate: 4.4, rev: 0.18, dly: 0.4, kit: 1.0 } },
   { cat: 'RP-10', title: 'A Side, Again', artist: 'Hélène Marchetti', year: 2026, side: '21:30', art: 'label_d', bg: '#b9843e', ink: '#f3ece1', dark: true, music: { bpm: 68, transpose: -1, swing: 0.08, chords: CHORDS.vamp, melody: MELODY.low, epCut: 3400, tremRate: 3.6, rev: 0.45, dly: 0.3, kit: 0.5 } }
 ];
+// All ten sleeves are visual variants of the same uploaded recording.
+RECORDS.forEach(record => Object.assign(record, { title: 'Peace Piece', artist: 'Bill Evans', year: 1958, side: '06:45' }));
 // ---- label printing (canvas 2D, once, while the loader is up) ----------------------------------------------------------
 const LABEL_PX = Math.min(innerWidth, innerHeight) < 700 ? 768 : 1024;
 const F_DISPLAY = 'Conthic, Anton, Impact, "Arial Narrow", sans-serif', F_MONO = '"DM Mono", ui-monospace, Menlo, monospace', F_SANS = '"Instrument Sans", system-ui, -apple-system, sans-serif';
@@ -1468,8 +1470,19 @@ dom.recNowPlay.addEventListener('click', () => {
 // browsers only let sound start after a click, tap or key press: the first one anywhere on the page unlocks it, so a
 // record dropped by the scroll is heard (until then it plays silently and the bar offers "Ses açık")
 {
-  const unlock = e => { if (e && e.target && e.target.closest && e.target.closest('#heroSound, #filmSound')) return; if (window.TT) { window.TT.unlockAudio(); setTimeout(refreshNow, 60); } for (const ev of ['pointerdown', 'keydown', 'touchend']) window.removeEventListener(ev, unlock, true); };
-  for (const ev of ['pointerdown', 'keydown', 'touchend']) window.addEventListener(ev, unlock, true);
+  const events = ['pointerdown', 'click', 'keydown', 'touchend'];
+  const unlock = e => {
+    if (e?.target?.closest?.('#heroSound, #filmSound')) return;
+    const tt = window.TT;
+    if (!tt || tt.muted) return;
+    tt.unlockAudio();
+    // Do not discard listeners before the 3D API is ready or audio is permitted.
+    setTimeout(() => {
+      refreshNow();
+      if (tt.audioContextState === 'running') events.forEach(ev => window.removeEventListener(ev, unlock, true));
+    }, 100);
+  };
+  events.forEach(ev => window.addEventListener(ev, unlock, true));
 }
 
 // ---- Lenis ---------------------------------------------------------------------------------------------------
@@ -1575,8 +1588,8 @@ function onState(st) {
   // the sound controls show whether sound can be heard: the record may be playing silently (the film cues it without a
   // gesture, and browsers keep audio locked until one); the first press unlocks, after that they mute / unmute
   const audible = !!st.audible;
-  dom.filmSound.setAttribute('aria-pressed', audible); dom.filmSound.querySelector('.t').textContent = audible ? 'Ses açık' : 'Ses kapalı';
-  dom.heroSound.setAttribute('aria-pressed', audible); dom.heroSound.querySelector('.t').textContent = audible ? 'Sound is on' : 'Sesi aç';
+  dom.filmSound.setAttribute('aria-pressed', audible); dom.filmSound.querySelector('.t').textContent = audible ? 'Ses açık' : (st.muted ? 'Ses kapalı' : 'Sesi etkinleştir');
+  dom.heroSound.setAttribute('aria-pressed', audible); dom.heroSound.querySelector('.t').textContent = audible ? 'Ses açık' : 'Sesi etkinleştir';
   dom.filmSound.setAttribute('aria-label', audible ? 'Mute audio' : 'Turn the sound on');
   if (st.phase === 'stopping' && film.zone) film.hold = true;
   if (car.landed) refreshNow();
@@ -3542,129 +3555,18 @@ function makeCrackle(ctx, secs = 11) {
   }
   return b;
 }
+// One uploaded recording for every visual record selection; cached after decoding.
+let recordingPromise;
 function renderMusic(sr, spec) {
-  const MUSIC = Object.assign({}, MUSIC_BASE, spec || {}), T = MUSIC.transpose || 0;   // site: per-pressing variation
-  const beat = 60 / MUSIC.bpm, bar = beat * 4, loopLen = bar * MUSIC.bars, tail = 3.0;
-  const o = new OfflineAudioContext(2, Math.ceil((loopLen + tail) * sr), sr);
-  const sw = b => b + (Math.abs((b % 1) - 0.5) < 0.01 ? MUSIC.swing : 0);           // swung off-beats
-  const hum = () => (Math.random() - 0.5) * 0.018;                                      // human timing
-  // --- master chain: warmth (gentle low-pass), rumble filter, soft clip for glue
-  const master = o.createGain(); master.gain.value = 1;
-  const warm = o.createBiquadFilter(); warm.type = 'lowpass'; warm.frequency.value = 10500; warm.Q.value = 0.5;
-  const hp = o.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 38;
-  const shaper = o.createWaveShaper(); shaper.curve = softClipCurve(0.7); shaper.oversample = '2x';
-  master.connect(warm); warm.connect(hp); hp.connect(shaper); shaper.connect(o.destination);
-  const reverb = o.createConvolver(); reverb.buffer = makeIR(o, 2.2);
-  const revGain = o.createGain(); revGain.gain.value = MUSIC.rev ?? 0.3; reverb.connect(revGain); revGain.connect(master);
-  const delay = o.createDelay(1.0); delay.delayTime.value = beat * 0.75;                  // dotted-eighth echo
-  const dlp = o.createBiquadFilter(); dlp.type = 'lowpass'; dlp.frequency.value = 2400;
-  const fb = o.createGain(); fb.gain.value = 0.3; delay.connect(dlp); dlp.connect(fb); fb.connect(delay);
-  const dlGain = o.createGain(); dlGain.gain.value = MUSIC.dly ?? 0.5; dlp.connect(dlGain); dlGain.connect(master);
-  const bus = (level, rev, dly) => {
-    const g = o.createGain(); g.gain.value = level; g.connect(master);
-    if (rev) { const s = o.createGain(); s.gain.value = rev; g.connect(s); s.connect(reverb); }
-    if (dly) { const s = o.createGain(); s.gain.value = dly; g.connect(s); s.connect(delay); }
-    return g;
-  };
-  // Rhodes bus: mellow low-pass and the classic tremolo
-  const epLP = o.createBiquadFilter(); epLP.type = 'lowpass'; epLP.frequency.value = MUSIC.epCut || 4200; epLP.Q.value = 0.7;
-  const trem = o.createGain(); trem.gain.value = 0.82;
-  const lfo = o.createOscillator(); lfo.frequency.value = MUSIC.tremRate || 4.6; const lfoG = o.createGain(); lfoG.gain.value = 0.18;
-  lfo.connect(lfoG); lfoG.connect(trem.gain); lfo.start(0);
-  const epBus = bus(1.05, 0.28, 0.16); epLP.connect(trem); trem.connect(epBus);
-  const bassLP = o.createBiquadFilter(); bassLP.type = 'lowpass'; bassLP.frequency.value = 420; const bassBus = bus(MUSIC.bassLevel ?? 0.4, 0.04, 0); bassLP.connect(bassBus);
-  const drumBus = bus(MUSIC.kit ?? 0.9, 0.12, 0);
-  const vibBus = bus(MUSIC.vib ?? 0.5, 0.5, 0.35);
-  const noise = makeNoise(o, 2);
-  // --- instruments
-  function ep(t, midi, vel, dur) {                                                        // FM electric piano: 1:1 modulator with a fast-decaying index, a tine ping, long decay
-    t = Math.max(0, t);
-    const f = mtof(midi + T) * (1 + (Math.random() - 0.5) * 0.003);
-    const car = o.createOscillator(); car.type = 'sine'; car.frequency.value = f;
-    const mod = o.createOscillator(); mod.type = 'sine'; mod.frequency.value = f;
-    const mg = o.createGain(); mg.gain.setValueAtTime(f * (0.9 + 1.2 * vel), t); mg.gain.setTargetAtTime(f * 0.06, t + 0.01, 0.16);
-    mod.connect(mg); mg.connect(car.frequency);
-    const tine = o.createOscillator(); tine.type = 'sine'; tine.frequency.value = f * 7;
-    const tg = o.createGain(); tg.gain.setValueAtTime(0.045 * vel, t); tg.gain.setTargetAtTime(0, t + 0.01, 0.08);
-    const env = o.createGain(); env.gain.setValueAtTime(0, t); env.gain.linearRampToValueAtTime(0.42 * vel, t + 0.008);
-    env.gain.setTargetAtTime(0, t + 0.03, 0.55 + dur * 0.35);
-    car.connect(env); tine.connect(tg); tg.connect(env); env.connect(epLP);
-    const end = t + dur + 3.0;
-    car.start(t); mod.start(t); tine.start(t); car.stop(end); mod.stop(end); tine.stop(end);
-  }
-  function bass(t, midi, vel, dur) {                                                      // round upright-style bass: sine + a little triangle, low-passed
-    t = Math.max(0, t);
-    const f = mtof(midi + T);
-    const o1 = o.createOscillator(); o1.type = 'sine'; o1.frequency.value = f;
-    const o2 = o.createOscillator(); o2.type = 'triangle'; o2.frequency.value = f; const g2 = o.createGain(); g2.gain.value = 0.35;
-    const env = o.createGain(); env.gain.setValueAtTime(0, t); env.gain.linearRampToValueAtTime(0.9 * vel, t + 0.012);
-    env.gain.setTargetAtTime(0.45 * vel, t + 0.05, 0.3); env.gain.setTargetAtTime(0, t + dur, 0.09);
-    o1.connect(env); o2.connect(g2); g2.connect(env); env.connect(bassLP);
-    o1.start(t); o2.start(t); o1.stop(t + dur + 0.6); o2.stop(t + dur + 0.6);
-  }
-  function vibe(t, midi, vel, dur) {                                                      // vibraphone: sine with a fading 4th partial, slow vibrato, panned by pitch
-    t = Math.max(0, t);
-    const f = mtof(midi + T);
-    const o1 = o.createOscillator(); o1.type = 'sine'; o1.frequency.value = f;
-    const o2 = o.createOscillator(); o2.type = 'sine'; o2.frequency.value = f * 4; const g2 = o.createGain(); g2.gain.setValueAtTime(0.12, t); g2.gain.setTargetAtTime(0, t, 0.12);
-    const vib = o.createOscillator(); vib.frequency.value = 5.2; const vg = o.createGain(); vg.gain.value = f * 0.006; vib.connect(vg); vg.connect(o1.frequency);
-    const env = o.createGain(); env.gain.setValueAtTime(0, t); env.gain.linearRampToValueAtTime(0.5 * vel, t + 0.012); env.gain.setTargetAtTime(0, t + 0.05, 0.35 + dur * 0.5);
-    const pan = o.createStereoPanner(); pan.pan.value = clamp((midi - 72) / 30, -0.5, 0.5);
-    o1.connect(env); o2.connect(g2); g2.connect(env); env.connect(pan); pan.connect(vibBus);
-    const end = t + dur + 2.5; o1.start(t); o2.start(t); vib.start(t); o1.stop(end); o2.stop(end); vib.stop(end);
-  }
-  function hit(t, vel, filt, decay, level, body) {                                        // filtered noise burst (+ optional pitched body) for the kit
-    t = Math.max(0, t);
-    const src = o.createBufferSource(); src.buffer = noise;
-    const f = o.createBiquadFilter(); f.type = filt.type; f.frequency.value = filt.f; f.Q.value = filt.q || 0.7;
-    const env = o.createGain(); env.gain.setValueAtTime(level * vel, t); env.gain.setTargetAtTime(0, t + 0.002, decay);
-    src.connect(f); f.connect(env); env.connect(drumBus);
-    src.start(t, Math.random() * 1.5); src.stop(t + decay * 6 + 0.05);
-    if (body) {
-      const b = o.createOscillator(); b.frequency.setValueAtTime(body.f0, t); b.frequency.exponentialRampToValueAtTime(body.f1, t + body.slide);
-      const bg = o.createGain(); bg.gain.setValueAtTime(body.level * vel, t); bg.gain.setTargetAtTime(0, t + 0.005, body.decay);
-      b.connect(bg); bg.connect(drumBus); b.start(t); b.stop(t + body.decay * 6 + 0.05);
-    }
-  }
-  const kick = (t, v) => hit(t, v, { type: 'lowpass', f: 900 }, 0.012, 0.25, { f0: 120, f1: 44, slide: 0.09, level: 0.9, decay: 0.11 });
-  const rimshot = (t, v) => hit(t, v, { type: 'bandpass', f: 2100, q: 1.4 }, 0.035, 0.35, { f0: 240, f1: 170, slide: 0.03, level: 0.25, decay: 0.03 });
-  const hat = (t, v) => hit(t, v, { type: 'highpass', f: 6500, q: 0.7 }, 0.024, 0.5);
-  const brush = (t, v) => hit(t, v, { type: 'bandpass', f: 3400, q: 0.5 }, 0.09, 0.28);
-  // --- arrangement
-  for (let b = 0; b < MUSIC.bars; b++) {
-    const ch = MUSIC.chords[b], next = MUSIC.chords[(b + 1) % MUSIC.bars], t0 = b * bar;
-    const at = beats => Math.max(0, t0 + sw(beats) * beat + hum());
-    // Rhodes: a rolled chord on 1, a lighter stab on the and-of-2, an anticipation of the next chord on 4-and (even bars)
-    ch.notes.forEach((n, i) => ep(at(0) + i * 0.022, n, 0.62 + Math.random() * 0.08, 2.2));
-    ch.notes.slice(1).forEach((n, i) => ep(at(2.5) + i * 0.018, n, 0.36 + Math.random() * 0.06, 1.1));
-    if (b % 2 === 1) next.notes.slice(0, 3).forEach((n, i) => ep(at(3.5) + i * 0.02, n, 0.3, 0.5));
-    // bass: root on 1, the fifth on the and-of-2, the octave on 3 or a chromatic approach to the next root on 4-and
-    bass(at(0), ch.bass, 0.85, 1.7);
-    bass(at(2.5), ch.bass + 7, 0.6, 0.85);
-    if (b % 2 === 1) bass(at(3.5), next.bass + (b % 4 === 3 ? -1 : 1), 0.5, 0.42);
-    else bass(at(3), ch.bass + 12, 0.4, 0.45);
-    // kit: kick on 1 and the and-of-2, rim on 2 and 4, swung eighth hats, brush swells into the backbeats
-    kick(at(0), 0.9); kick(at(2.5), 0.7); if (b % 4 === 3) kick(at(3.5), 0.55);
-    rimshot(at(1), 0.7); rimshot(at(3), 0.75);
-    for (let e = 0; e < 8; e++) hat(at(e / 2), e % 2 ? 0.45 : 0.75);
-    brush(at(1) - 0.06, 0.6); brush(at(3) - 0.06, 0.7);
-  }
-  for (const [b, bt, m, len] of MUSIC.melody) vibe(Math.max(0, b * bar + sw(bt) * beat + hum()), m, 0.7, len * beat);
-  return o.startRendering().then(rendered => {
-    // fold the tail (decays past the loop point) onto the start so the loop is seamless, then normalise to -6 dBFS
-    const n = Math.round(loopLen * sr), buf = o.createBuffer(2, n, sr);     // buffers are context-independent: no live AudioContext needed
-    let peak = 0;
-    for (let ch = 0; ch < 2; ch++) {
-      const src = rendered.getChannelData(ch), dst = buf.getChannelData(ch);
-      dst.set(src.subarray(0, n));
-      for (let i = 0, m = Math.min(src.length - n, n); i < m; i++) dst[i] += src[n + i];
-      for (let i = 0; i < n; i++) peak = Math.max(peak, Math.abs(dst[i]));
-    }
-    const k = peak > 0 ? 0.5 / peak : 1;
-    for (let ch = 0; ch < 2; ch++) { const d = buf.getChannelData(ch); for (let i = 0; i < n; i++) d[i] *= k; }
-    if (spec && spec.seq !== undefined ? spec.seq === audio.music.want : audio.music.want === undefined) { audio.music.buffer = buf; audio.music.loopLen = loopLen; }
-    return buf;
-  });
+  if (!recordingPromise) recordingPromise = fetch('assets/peace-piece.mp3')
+    .then(response => { if (!response.ok) throw new Error('Audio HTTP ' + response.status); return response.arrayBuffer(); })
+    .then(bytes => {
+      const decoder = audio.ctx || new OfflineAudioContext(2, 1, 44100);
+      return decoder.decodeAudioData(bytes);
+    })
+    .then(buffer => { audio.music.buffer = buffer; audio.music.loopLen = buffer.duration; return buffer; })
+    .catch(error => { recordingPromise = null; audio.music.rendering = null; throw error; });
+  return recordingPromise;
 }
 function audioUnlock() {                                          // must run inside a user gesture
   if (!audio.ctx) {
@@ -3692,13 +3594,13 @@ function startSource(part, loopLen) {
   if (part.src || !part.buffer) return;
   const s = audio.ctx.createBufferSource(); s.buffer = part.buffer; s.loop = true;
   if (loopLen) { s.loopStart = 0; s.loopEnd = loopLen; }
-  s.playbackRate.value = 0.05; s.connect(part.gain); s.start(); part.src = s;
+  s.playbackRate.value = part === audio.music ? 1 : 0.05; s.connect(part.gain); s.start(); part.src = s;
 }
 function stopSource(part) { if (!part.src) return; try { part.src.stop(); } catch (e) {} part.src.disconnect(); part.src = null; }
 function audioStylusDown() {
   audio.stylus = true;
   if (!audio.ctx) return;
-  startSource(audio.crackle, 0);
+  // Keep the uploaded piano recording free of synthetic vinyl noise.
   if (audio.music.buffer) startSource(audio.music, audio.music.loopLen);
   else if (audio.music.rendering) audio.music.rendering.then(() => { if (audio.stylus) startSource(audio.music, audio.music.loopLen); });
 }
@@ -3720,7 +3622,7 @@ function updateAudio(dt) {
   const now = a.ctx.currentTime, ratio = state.platSpeed / NOMINAL_RAD;            // 1 = 33 1/3 rpm, 1.35 = 45 rpm
   const m = a.music, c = a.crackle;
   const musicLevel = a.stylus ? smooth01(0.3, 0.92, ratio) : 0;                  // the music fades in as the platter comes up to speed
-  if (m.src) { m.src.playbackRate.setTargetAtTime(Math.max(0.05, ratio), now, 0.06); m.gain.gain.setTargetAtTime(musicLevel, now, a.stylus ? 0.2 : 0.09); }
+  if (m.src) { m.src.playbackRate.setTargetAtTime(1, now, 0.06); m.gain.gain.setTargetAtTime(musicLevel, now, a.stylus ? 0.2 : 0.09); }
   if (c.src) { c.src.playbackRate.setTargetAtTime(Math.max(0.05, ratio), now, 0.06); c.gain.gain.setTargetAtTime(a.stylus ? 0.12 * clamp(ratio * 2, 0.15, 1) : 0, now, 0.12); }
   a.master.gain.setTargetAtTime(a.muted ? 0 : 1, now, 0.08);
   if (!a.stylus && (m.src || c.src)) { a.fadeT += dt; if (a.fadeT > 1.2) { stopSource(m); stopSource(c); a.fadeT = 0; } } else a.fadeT = 0;
@@ -4392,7 +4294,7 @@ window.TT = {
   toggle() { pressButton(); togglePlay(); },
   // the film's cue: the start button goes down, the motor runs, then the arm lifts, swings, settles and lowers, each
   // step slow and physical (CUE_T.slow). Silent until the visitor unlocks the audio (no gesture, no sound).
-  cue() { if (isActive()) return false; pressButton(); startPlay({ slow: true }); return true; },
+  cue() { if (isActive()) return false; audioUnlock(); pressButton(); startPlay({ slow: true }); return true; },
   toggleSpeed, toggleMute,
   get phase() { return state.phase; },
   get active() { return isActive(); },
@@ -4474,14 +4376,8 @@ window.TT = {
     const it = carousel.items[i]; if (!it) return false;
     carousel.chosen = i;
     labelMat.map = it.tex; forceFrames = Math.max(forceFrames, 2);
-    const spec = it.rec.music;
-    if (spec && window.OfflineAudioContext) {
-      const seq = (audio.music.want = (audio.music.want || 0) + 1);
-      audio.music.rendering = Promise.resolve().then(() => renderMusic(48000, Object.assign({ seq }, spec))).then(buf => {
-        if (seq === audio.music.want && audio.music.src) { stopSource(audio.music); if (audio.stylus) startSource(audio.music, audio.music.loopLen); }
-        return buf;
-      }).catch(err => { console.warn('pressing render failed:', err); return null; });
-    }
+    // Changing the label preserves the uploaded recording and playback position.
+    if (!audio.music.rendering) audio.music.rendering = renderMusic(44100).catch(err => { console.warn('recording load failed', err); return null; });
     return true;
   },
   unlockAudio() { try { audioUnlock(); } catch (e) {} },
@@ -4560,7 +4456,9 @@ async function start() {
   frame(lastT); // Paint the prepared scene once underneath the cover.
   requestAnimationFrame(() => { if (SITE.onProgress) SITE.onProgress(1); if (SITE.onReady) SITE.onReady(window.TT); });
   // Audio preparation begins after the entrance, instead of competing with GPU warm-up.
-  setTimeout(prerenderMusic, 2100);
+  prerenderMusic();
+  // Try default-on audio; browsers that require a gesture retain the listeners above.
+  audioUnlock();
 }
 start().catch(err => { console.error(err); if (SITE.onError) SITE.onError(err); });
 

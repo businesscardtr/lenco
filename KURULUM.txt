@@ -15,3 +15,7 @@ WebGL destekleyen güncel tarayıcı gerekir. Bu oturumda 3D görsel kontrolü y
 
 TEKNİK BİLGİ KAYNAĞI
 https://www.lenco.com/en/products/lenco-lbt-188wa-platenspeler-met-bluetooth-transmissie-donker-bruin
+
+Müzik: Bill Evans – Peace Piece. Yerel assets/peace-piece.mp3 dosyası; parça bitince tekrar başlar. Ses ziyaretçinin Sesi aç / Listen düğmesine basmasıyla açılır.
+
+Ses varsayılan olarak açık; iğne plağa indiğinde kayıt başlar. Tarayıcı otomatik sesi engellerse ilk tıklama/dokunuş sesi etkinleştirir.
