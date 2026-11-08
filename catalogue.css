@@ -7,3 +7,11 @@
 .product-photo img{width:92%;height:92%;mix-blend-mode:normal}
 .product:hover img{transform:scale(1.025)}
 #detailBody img{background:#fff;max-height:480px;border-radius:3px}
+
+/* Normalize the product silhouette, including white margins in original TT-20 photos. */
+.product[data-code="TT-20 BLACK"] .product-photo{position:relative}
+.product[data-code="TT-20 BLACK"] .product-photo img{position:absolute;max-width:none;width:84.048%;height:auto;left:50%;top:50%;transform:translate(-48.923%,-48.651%);object-fit:initial}
+.product[data-code="TT-20 GREY"] .product-photo{position:relative}
+.product[data-code="TT-20 GREY"] .product-photo img{position:absolute;max-width:none;width:78.506%;height:auto;left:50%;top:50%;transform:translate(-49.256%,-47.951%);object-fit:initial}
+.product[data-code="TT-20 BROWN"] .product-photo{position:relative}
+.product[data-code="TT-20 BROWN"] .product-photo img{position:absolute;max-width:none;width:81.284%;height:auto;left:50%;top:50%;transform:translate(-48.379%,-44.206%);object-fit:initial}

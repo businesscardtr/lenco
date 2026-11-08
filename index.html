@@ -2,6 +2,28 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
+<script>
+// Capture the first interaction even while WebGL and its modules are still loading.
+window.lencoSound = { context: null, bytes: null };
+window.lencoSound.bytes = fetch('assets/peace-piece.mp3').then(r => {
+  if (!r.ok) throw new Error('Music HTTP ' + r.status);
+  return r.arrayBuffer();
+});
+window.lencoSound.bytes.catch(() => {});
+window.lencoEnableSound = () => {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const context = window.lencoSound.context || (window.lencoSound.context = new AC());
+    if (context.state !== 'running') context.resume().catch(() => {});
+  } catch (e) { console.warn('Audio initialization:', e); }
+};
+['pointerdown','pointerup','click','touchend','keydown','wheel'].forEach(type => {
+  window.addEventListener(type, window.lencoEnableSound, { capture: true, passive: true });
+});
+window.lencoEnableSound();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#000000">
@@ -502,7 +524,7 @@ body.ready #rail{opacity:1}
 .film-p .l.nowrap{white-space:normal}.film-head .film-p{max-width:min(520px,85vw)}
 #uwModels{display:none!important}
 </style>
-<link rel="stylesheet" href="catalogue.css"></head>
+<link rel="stylesheet" href="catalogue.css?v=20261106"></head>
 <body>
 <div id="ambientBackground" aria-hidden="true"><canvas id="webgl-halftone"></canvas></div>
 
@@ -1042,7 +1064,7 @@ function filmRig(p) {
 }
 // the record goes on at the end of the hero's approach (once per visit of hero-end + film; a stop by the visitor there holds until they leave)
 const film = { cued: false, hold: false, shot: -1, zone: false, showUi: false };
-function filmCue() { const t = TT(); if (!film.cued && !film.hold && t.phase === 'stopped') { film.cued = true; t.cue(); } }
+function filmCue() { const t = TT(); if (!film.cued && !film.hold && t.phase === 'stopped' && t.musicReady) { film.cued = true; t.cue(); } }
 function filmCaption(i) {
   if (i === film.shot) return; film.shot = i;
   const s = FILM[i] || PULL_CAP, apply = () => { dom.filmCapNum.textContent = s.n; dom.filmCapTxt.textContent = s.cap; dom.filmCapX.textContent = s.x ? ' · ' + s.x : ''; };
@@ -3558,8 +3580,7 @@ function makeCrackle(ctx, secs = 11) {
 // One uploaded recording for every visual record selection; cached after decoding.
 let recordingPromise;
 function renderMusic(sr, spec) {
-  if (!recordingPromise) recordingPromise = fetch('assets/peace-piece.mp3')
-    .then(response => { if (!response.ok) throw new Error('Audio HTTP ' + response.status); return response.arrayBuffer(); })
+  if (!recordingPromise) recordingPromise = window.lencoSound.bytes
     .then(bytes => {
       const decoder = audio.ctx || new OfflineAudioContext(2, 1, 44100);
       return decoder.decodeAudioData(bytes);
@@ -3572,7 +3593,8 @@ function audioUnlock() {                                          // must run in
   if (!audio.ctx) {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
-    const ctx = audio.ctx = new AC({ latencyHint: 'interactive' });
+    const ctx = audio.ctx = window.lencoSound.context || new AC({ latencyHint: 'interactive' });
+    window.lencoSound.context = ctx;
     ctx.onstatechange = () => updateUI();                         // site: the page's sound controls follow the context
     audio.master = ctx.createGain(); audio.master.gain.value = audio.muted ? 0 : 1;
     audio.analyser = ctx.createAnalyser(); audio.analyser.fftSize = 512; audio.analyser.smoothingTimeConstant = 0.72;
@@ -3600,6 +3622,9 @@ function stopSource(part) { if (!part.src) return; try { part.src.stop(); } catc
 function audioStylusDown() {
   audio.stylus = true;
   if (!audio.ctx) return;
+  if (audio.ctx.state !== 'running') audio.ctx.resume().catch(() => {});
+  // The gain opens at contact, not in response to a separate sound button.
+  audio.music.gain.gain.setValueAtTime(1, audio.ctx.currentTime);
   // Keep the uploaded piano recording free of synthetic vinyl noise.
   if (audio.music.buffer) startSource(audio.music, audio.music.loopLen);
   else if (audio.music.rendering) audio.music.rendering.then(() => { if (audio.stylus) startSource(audio.music, audio.music.loopLen); });
@@ -3621,7 +3646,7 @@ function updateAudio(dt) {
   const a = audio; if (!a.ctx) return;
   const now = a.ctx.currentTime, ratio = state.platSpeed / NOMINAL_RAD;            // 1 = 33 1/3 rpm, 1.35 = 45 rpm
   const m = a.music, c = a.crackle;
-  const musicLevel = a.stylus ? smooth01(0.3, 0.92, ratio) : 0;                  // the music fades in as the platter comes up to speed
+  const musicLevel = a.stylus ? 1 : 0;                  // the music fades in as the platter comes up to speed
   if (m.src) { m.src.playbackRate.setTargetAtTime(1, now, 0.06); m.gain.gain.setTargetAtTime(musicLevel, now, a.stylus ? 0.2 : 0.09); }
   if (c.src) { c.src.playbackRate.setTargetAtTime(Math.max(0.05, ratio), now, 0.06); c.gain.gain.setTargetAtTime(a.stylus ? 0.12 * clamp(ratio * 2, 0.15, 1) : 0, now, 0.12); }
   a.master.gain.setTargetAtTime(a.muted ? 0 : 1, now, 0.08);
@@ -4409,6 +4434,7 @@ window.TT = {
 // ---- boot -------------------------------------------------------------------------------------------------------
 const yieldToPage = () => new Promise(resolve => requestAnimationFrame(resolve));
 async function start() {
+  prerenderMusic();
   await yieldToPage();
   await loadWood();
   if (SITE.onProgress) SITE.onProgress(0.88);
@@ -5014,5 +5040,5 @@ if (el) {
   });
 })();
 </script>
-<script src="catalogue.js?v=20261105-images2"></script></body>
+<script src="catalogue.js?v=20261106"></script></body>
 </html>
