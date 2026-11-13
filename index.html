@@ -5,7 +5,7 @@
 <script>
 // Capture the first interaction even while WebGL and its modules are still loading.
 window.lencoSound = { context: null, bytes: null };
-window.lencoSound.bytes = fetch('assets/peace-piece.mp3').then(r => {
+window.lencoSound.bytes = fetch('assets/peace-piece-web.mp3').then(r => {
   if (!r.ok) throw new Error('Music HTTP ' + r.status);
   return r.arrayBuffer();
 });
@@ -35,9 +35,9 @@ window.lencoEnableSound();
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://madebysourasith-sudo.github.io" crossorigin>
-<link rel="preload" as="image" href="assets/asset-08.jpg" crossorigin="anonymous" fetchpriority="high">
-<link rel="preload" as="image" href="assets/asset-11.jpg" crossorigin="anonymous" fetchpriority="high">
-<link rel="preload" as="image" href="assets/asset-14.jpg" crossorigin="anonymous" fetchpriority="high">
+<link rel="preload" as="image" href="assets/asset-08-opt.webp" crossorigin="anonymous" fetchpriority="high">
+<link rel="preload" as="image" href="assets/asset-11-opt.webp" crossorigin="anonymous" fetchpriority="high">
+<link rel="preload" as="image" href="assets/asset-14-opt.webp" crossorigin="anonymous" fetchpriority="high">
 <style>
 /* no Conthic file in .dream-loop/site2/fonts/ - the display stack falls back to Anton (Google Fonts) */
 /* LENCO v2 — black ground, warm off-white type, one walnut-amber accent.
@@ -524,7 +524,11 @@ body.ready #rail{opacity:1}
 .film-p .l.nowrap{white-space:normal}.film-head .film-p{max-width:min(520px,85vw)}
 #uwModels{display:none!important}
 </style>
-<link rel="stylesheet" href="catalogue.css?v=20261106"></head>
+<link rel="stylesheet" href="catalogue.css?v=20261108"><style>
+#recordPicker{position:fixed;right:22px;bottom:80px;z-index:1000;width:min(340px,calc(100vw - 32px));border:1px solid #ffffff30;border-radius:14px;background:#171715f2;color:#f4efe6;box-shadow:0 10px 40px #0005;font-family:system-ui,sans-serif}
+#recordPicker summary{cursor:pointer;padding:13px 17px;font-size:13px;list-style:none}#recordPicker summary::-webkit-details-marker{display:none}
+.record-options{display:grid;padding:0 8px;gap:3px}.record-options button{display:flex;align-items:center;gap:12px;width:100%;padding:10px;background:transparent;color:inherit;border:1px solid transparent;border-radius:9px;text-align:left;cursor:pointer}.record-options button[aria-pressed=true]{background:#ffffff10;border-color:#d7b77c80}.record-options button:focus-visible{outline:2px solid #d7b77c}.record-options strong{display:block;font-size:13px}.record-options small{display:block;font-size:11px;opacity:.65;margin-top:3px}.mini-vinyl{flex:none;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,#eee 0 2px,var(--label) 3px 10px,#222 11px 12px,#090909 13px 15px,#222 16px 17px,#090909 18px);box-shadow:0 2px 5px #0008}#trackStatus{font-size:11px;opacity:.7;margin:9px 17px 13px}@media(max-width:600px){#recordPicker{right:12px;bottom:74px}}
+</style></head>
 <body>
 <div id="ambientBackground" aria-hidden="true"><canvas id="webgl-halftone"></canvas></div>
 
@@ -627,7 +631,7 @@ body.ready #rail{opacity:1}
       <p class="k"><span class="l" style="--i:0"><span>Bill Evans · Peace Piece<span class="x"> · sürekli tekrar</span></span></span></p>
       <h2 class="disp h-m"><span class="l" style="--i:1"><span>Bir plak seç.</span></span></h2>
     </div>
-    <p class="k rec-count" aria-hidden="true"><span id="recIdx">01</span><span class="dim"> / 10</span></p>
+    <p class="k rec-count" aria-hidden="true"><span id="recIdx">01</span><span class="dim"> / 04</span></p>
     <div class="rec-ui" id="recUi" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Lenco pressings, series one. Scroll, or use the arrow keys, to browse the records.">
       <span class="sr-only" id="recLive" aria-live="polite"></span>
     </div>
@@ -700,7 +704,7 @@ body.ready #rail{opacity:1}
 
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Lenco Analog">
   <div class="ld-assembly" aria-hidden="true">
-    <div class="ld-record"><div class="ld-label"><img src="assets/asset-14.jpg" alt="" decoding="async" fetchpriority="high" width="256" height="256"></div></div>
+    <div class="ld-record"><div class="ld-label"><img src="assets/asset-14-opt.webp" alt="" decoding="async" fetchpriority="high" width="256" height="256"></div></div>
     <div class="ld-sheen"></div><i class="ld-spindle"></i>
   </div>
   <div class="ld-copy">
@@ -722,7 +726,7 @@ const initHalftoneWebGL = () => {
     const canvas = document.getElementById('webgl-halftone');
     if(!canvas) return;
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setClearColor(0x0A0A0A, 1);
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
@@ -1064,7 +1068,7 @@ function filmRig(p) {
 }
 // the record goes on at the end of the hero's approach (once per visit of hero-end + film; a stop by the visitor there holds until they leave)
 const film = { cued: false, hold: false, shot: -1, zone: false, showUi: false };
-function filmCue() { const t = TT(); if (!film.cued && !film.hold && t.phase === 'stopped' && t.musicReady) { film.cued = true; t.cue(); } }
+function filmCue() { const t = TT(); if (!film.cued && !film.hold && t.phase === 'stopped' && t.musicReady && !t.selecting) { film.cued = true; t.cue(); } }
 function filmCaption(i) {
   if (i === film.shot) return; film.shot = i;
   const s = FILM[i] || PULL_CAP, apply = () => { dom.filmCapNum.textContent = s.n; dom.filmCapTxt.textContent = s.cap; dom.filmCapX.textContent = s.x ? ' · ' + s.x : ''; };
@@ -1333,23 +1337,10 @@ const ART = {
     const d = x.createLinearGradient(0, 0, S * 0.6, S * 0.6); d.addColorStop(0, 'rgba(6,2,20,0.55)'); d.addColorStop(1, 'rgba(6,2,20,0)'); x.fillStyle = d; x.fillRect(0, 0, S, S);
   }
 };
-const LABEL_ART = { label_a: 'assets/asset-01.jpg', label_b: 'assets/asset-02.jpg', label_c: 'assets/asset-03.jpg', label_d: 'assets/asset-04.jpg', label_e: 'assets/asset-05.jpg', label_f: 'assets/asset-06.jpg', label_wood: 'assets/asset-07.jpg' };
-const RECORDS = [
-  { cat: 'RP-01', title: 'Peace Piece', artist: 'Bill Evans', year: 2026, side: '19:40', art: 'label_e', bg: '#1a1410', ink: '#f3ece1', dark: true, music: { bpm: 74 } },
-  { cat: 'RP-02', title: 'Thirty-Three and a Third', artist: 'Noor Haddad', year: 2026, side: '21:12', art: 'label_b', bg: '#e9dfc9', ink: '#17120e', music: { bpm: 66, transpose: -3, swing: 0.07, chords: CHORDS.dorian, melody: MELODY.low, epCut: 3200, tremRate: 3.4, rev: 0.42, dly: 0.35, kit: 0.55 } },
-  { cat: 'RP-03', title: 'Night Bus to Gent', artist: 'Lamp & Motor', year: 2025, side: '22:04', art: 'label_a', bg: '#0b1020', ink: '#f3ece1', dark: true, music: { bpm: 84, transpose: 2, swing: 0.12, chords: CHORDS.soul, melody: MELODY.busy, epCut: 5200, tremRate: 5.6, rev: 0.25, dly: 0.6, kit: 1.0 } },
-  { cat: 'RP-04', title: 'Oiled, Not Lacquered', artist: 'Ines Rauch', year: 2026, side: '18:25', art: 'label_wood', bg: '#2a1a10', ink: '#f3ece1', dark: true, music: { bpm: 70, transpose: -5, swing: 0.05, chords: CHORDS.vamp, epCut: 2800, tremRate: 2.8, rev: 0.5, dly: 0.3, kit: 0.4, vib: 0.3 } },
-  { cat: 'RP-05', title: 'Lead-In Groove', artist: 'Konstantin Vey', year: 2024, side: '23:50', art: null, draw: ART.rings, bg: '#0c0c0e', ink: '#d6cfc2', dark: true, music: { bpm: 62, transpose: -7, swing: 0.02, chords: CHORDS.dorian, melody: MELODY.none, epCut: 2400, tremRate: 6.5, rev: 0.55, dly: 0.62, kit: 0.3, vib: 0, bassLevel: 0.55 } },
-  { cat: 'RP-06', title: 'Four Minutes Left', artist: 'Mara & the Run-Out', year: 2026, side: '16:40', art: null, draw: ART.sun, bg: '#c9a19a', ink: '#f3ece1', dark: true, music: { bpm: 90, transpose: 4, swing: 0.06, chords: CHORDS.soul, epCut: 4800, tremRate: 4.0, rev: 0.22, dly: 0.45, kit: 0.9 } },
-  { cat: 'RP-07', title: 'The Weight of the Box', artist: 'Owen Dalloway', year: 2025, side: '24:30', art: 'label_f', bg: '#1c2430', ink: '#f3ece1', dark: true, music: { bpm: 58, transpose: -2, swing: 0.03, chords: CHORDS.vamp, melody: MELODY.low, epCut: 2600, tremRate: 3.0, rev: 0.6, dly: 0.5, kit: 0.25, vib: 0.35 } },
-  { cat: 'RP-08', title: 'Room Temperature', artist: 'Thermal', year: 2026, side: '20:00', art: null, draw: ART.thermal, bg: '#120418', ink: '#f3ece1', dark: true, music: { bpm: 78, transpose: 1, swing: 0.1, chords: CHORDS.dorian, melody: MELODY.busy, epCut: 3800, tremRate: 5.0, rev: 0.3, dly: 0.55, kit: 0.8 } },
-  { cat: 'RP-09', title: 'No Firmware', artist: 'The Analogue Committee', year: 2025, side: '17:55', art: 'label_c', bg: '#e8e2d4', ink: '#17120e', music: { bpm: 96, transpose: 5, swing: 0.14, melody: MELODY.busy, epCut: 5600, tremRate: 4.4, rev: 0.18, dly: 0.4, kit: 1.0 } },
-  { cat: 'RP-10', title: 'A Side, Again', artist: 'Hélène Marchetti', year: 2026, side: '21:30', art: 'label_d', bg: '#b9843e', ink: '#f3ece1', dark: true, music: { bpm: 68, transpose: -1, swing: 0.08, chords: CHORDS.vamp, melody: MELODY.low, epCut: 3400, tremRate: 3.6, rev: 0.45, dly: 0.3, kit: 0.5 } }
-];
-// All ten sleeves are visual variants of the same uploaded recording.
-RECORDS.forEach(record => Object.assign(record, { title: 'Peace Piece', artist: 'Bill Evans', year: 1958, side: '06:45' }));
+const LABEL_ART = { label_a: 'assets/asset-01.jpg', label_b: 'assets/asset-02-opt.webp', label_c: 'assets/asset-03.jpg', label_d: 'assets/asset-04-opt.webp', label_e: 'assets/asset-05-opt.webp', label_f: 'assets/asset-06.jpg', label_wood: 'assets/asset-07-opt.webp' };
+const RECORDS = [{"cat": "JAZZ-01", "title": "Peace Piece", "artist": "Bill Evans", "year": 1958, "side": "06:45", "art": "label_e", "bg": "#1a1410", "ink": "#f3ece1", "dark": true, "file": "assets/peace-piece-web.mp3", "music": {"bpm": 74}}, {"cat": "JAZZ-02", "title": "Blue in Green", "artist": "Miles Davis", "year": 1959, "side": "05:39", "art": "label_a", "bg": "#102333", "ink": "#f3ece1", "dark": true, "file": "assets/blue-in-green-web.mp3", "music": {"bpm": 66}}, {"cat": "JAZZ-03", "title": "I Fall in Love Too Easily", "artist": "Chet Baker", "year": 1954, "side": "03:23", "art": "label_b", "bg": "#e9dfc9", "ink": "#17120e", "file": "assets/i-fall-in-love-web.mp3", "music": {"bpm": 70}}, {"cat": "JAZZ-04", "title": "Moanin’", "artist": "Art Blakey & The Jazz Messengers", "year": 1958, "side": "09:42", "art": "label_d", "bg": "#b9843e", "ink": "#f3ece1", "dark": true, "file": "assets/moanin-web.mp3", "music": {"bpm": 96}}];
 // ---- label printing (canvas 2D, once, while the loader is up) ----------------------------------------------------------
-const LABEL_PX = Math.min(innerWidth, innerHeight) < 700 ? 768 : 1024;
+const LABEL_PX = Math.min(innerWidth, innerHeight) < 700 ? 512 : 768;
 const F_DISPLAY = 'Conthic, Anton, Impact, "Arial Narrow", sans-serif', F_MONO = '"DM Mono", ui-monospace, Menlo, monospace', F_SANS = '"Instrument Sans", system-ui, -apple-system, sans-serif';
 let grainCv = null;
 function grain() {
@@ -1411,11 +1402,11 @@ function drawLabel(rec, art, S) {
   x.restore();
   return c;
 }
-const loadArt = src => new Promise(res => { if (!src || src.length < 64) return res(null); const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
+const loadArt = src => new Promise(res => { if (!src) return res(null); const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
 async function buildLabels() {
   const fonts = Promise.all(['400 40px Conthic', '400 40px Anton', '500 20px "DM Mono"', '500 20px "Instrument Sans"'].map(f => document.fonts.load(f).catch(() => null)));
   const arts = {};
-  await Promise.all([Promise.race([fonts, new Promise(r => setTimeout(r, 3500))])].concat(Object.keys(LABEL_ART).map(async k => { arts[k] = await loadArt(LABEL_ART[k]); })));
+  await Promise.all([Promise.race([fonts, new Promise(r => setTimeout(r, 3500))])].concat([...new Set(RECORDS.map(r => r.art).filter(Boolean))].map(async k => { arts[k] = await loadArt(LABEL_ART[k]); })));
   return RECORDS.map(rec => drawLabel(rec, rec.art ? arts[rec.art] : null, LABEL_PX));
 }
 const labelsReady = buildLabels().catch(err => { console.warn('labels failed:', err); return null; });
@@ -1424,7 +1415,7 @@ const labelsReady = buildLabels().catch(err => { console.warn('labels failed:', 
 // the centred record leaves the row, turns flat and lands on the deck rising out of the dark, and the deck plays it.
 // Everything is scrubbed, so scrolling back lifts the record off again. The row always rests on Four Minutes Left.
 const REC_P = { browse: 0.44, dropA: 0.52, dropB: 0.78 };
-const REC_TARGET = RECORDS.findIndex(r => r.title === 'Four Minutes Left');   // the scroll rests on RP-06 and drops it
+const REC_TARGET = 0;   // Bill Evans is the default; explicit choice offsets the row
 const RISE0 = { x: 0, y: -48, z: 0, rx: 0.32, ry: -0.9, rz: 0 };
 const car = { pos: 0, target: 0, idx: -1, dragging: false, slotPx: 280, chosen: -1, bias: 0, biasCur: 0, dropI: -1, landed: false, part: 0, flight: 0, rise: 0 };
 const N_REC = RECORDS.length;
@@ -1433,8 +1424,8 @@ const browseStep = p => { const u = clamp(p / REC_P.browse, 0, 1) * REC_TARGET, 
 const dropLocked = () => car.dropI >= 0;
 function carStep(d) { if (dropLocked()) return; car.bias += d; if (reduced) car.biasCur = car.bias; }
 function carGo(i) {                                          // Scroll to where record i rests (no bias)
-  car.bias = car.biasCur = 0;
-  scrollToP(byId.records, REC_P.browse * Math.min(i, REC_TARGET) / REC_TARGET);
+  car.bias = car.biasCur = wrapIdx(i);
+  scrollToP(byId.records, REC_P.browse * 0.5);
 }
 function carMeta(idx) {
   const r = RECORDS[idx], m = dom.recMeta;
@@ -1651,7 +1642,7 @@ function showProgress(f) {
 let fallbackLoop = null, readyScheduled = false;
 function ready() {
   if (bootReady || readyScheduled) return;
-  const remaining = 1200 - (performance.now() - window.LENCO_LOADER_STARTED);
+  const remaining = 350 - (performance.now() - window.LENCO_LOADER_STARTED);
   if (remaining > 0) {
     readyScheduled = true;
     setTimeout(() => { readyScheduled = false; ready(); }, remaining);
@@ -1670,6 +1661,7 @@ function ready() {
 }
 window.SITE = {
   frame, onState,
+  selectArtist(index) { car.bias = car.biasCur = index; if (car.dropI >= 0) { car.dropI = index; car.chosen = index; } car.idx = index; carMeta(index); dom.recNowTitle.textContent = RECORDS[index].title; dom.recNowArtist.textContent = RECORDS[index].artist; },
   records: RECORDS, labelsReady,          // the pressings (the scene builds the row from these)
   get pressings() { return { pos: car.pos, target: car.target, idx: car.idx, chosen: car.chosen, dragging: car.dragging, vel: car.vel || 0, slotPx: car.slotPx }; },   // read-only, for QA
   onProgress: showProgress,
@@ -1712,23 +1704,23 @@ import { ConvexGeometry } from 'three/addons/geometries/ConvexGeometry.js';
 /*  relief / roughness rebuilt at full resolution: showcase/make_textures5.py) */
 /* ------------------------------------------------------------------ */
 const WOOD_SRC = {
-  map: "assets/asset-08.jpg",
-  normal: "assets/asset-09.jpg",
-  rough: "assets/asset-10.jpg",
-  sideMap: "assets/asset-11.jpg",              // the plinth's end faces (detail pass 2: rebuilt from a veneer scan at 73 px/cm, grain vertical, toned to the photo's right face)
-  sideNormal: "assets/asset-12.jpg",
-  sideRough: "assets/asset-13.jpg"
+  map: "assets/asset-08-opt.webp",
+  normal: "assets/asset-09-opt.webp",
+  rough: "assets/asset-10-opt.webp",
+  sideMap: "assets/asset-11-opt.webp",              // the plinth's end faces (detail pass 2: rebuilt from a veneer scan at 73 px/cm, grain vertical, toned to the photo's right face)
+  sideNormal: "assets/asset-12-opt.webp",
+  sideRough: "assets/asset-13-opt.webp"
 };
 // detail pass (detail/work/make_detail_textures.py): the printed label scan + its paper relief.
 // Detail pass 2 (detail2/work/make_detail2_textures.py): a tileable fine-grain layer cut from a walnut veneer scan -
 // open pores, micro grain lines and fibre tooth under 0.4 mm - as a colour multiplier, relief and roughness, laid
 // over every plinth face at close range (it mip-averages to neutral at the hero distance)
 const DETAIL_SRC = {
-  labelMap: "assets/asset-14.jpg",
-  labelBump: "assets/asset-15.jpg",
-  woodDetailColor: "assets/asset-16.jpg",
-  woodDetailNormal: "assets/asset-17.jpg",
-  woodDetailRough: "assets/asset-18.jpg"
+  labelMap: "assets/asset-14-opt.webp",
+  labelBump: "assets/asset-15-opt.webp",
+  woodDetailColor: "assets/asset-16-opt.webp",
+  woodDetailNormal: "assets/asset-17-opt.webp",
+  woodDetailRough: "assets/asset-18-opt.webp"
 };
 
 /* ------------------------------------------------------------------ */
@@ -3578,16 +3570,61 @@ function makeCrackle(ctx, secs = 11) {
   return b;
 }
 // One uploaded recording for every visual record selection; cached after decoding.
-let recordingPromise;
-function renderMusic(sr, spec) {
-  if (!recordingPromise) recordingPromise = window.lencoSound.bytes
-    .then(bytes => {
+let recordingPromise, selectedTrack = 0, selectionVersion = 0;
+function renderMusic() {
+  if (!recordingPromise) {
+    const index = selectedTrack, version = selectionVersion;
+    const bytes = index === 0 && window.lencoSound.bytes
+      ? window.lencoSound.bytes : fetch(window.SITE.records[index].file).then(r => {
+        if (!r.ok) throw new Error('Music HTTP ' + r.status); return r.arrayBuffer();
+      });
+    if (index === 0) window.lencoSound.bytes = null;
+    recordingPromise = bytes.then(bytes => {
       const decoder = audio.ctx || new OfflineAudioContext(2, 1, 44100);
       return decoder.decodeAudioData(bytes);
-    })
-    .then(buffer => { audio.music.buffer = buffer; audio.music.loopLen = buffer.duration; return buffer; })
-    .catch(error => { recordingPromise = null; audio.music.rendering = null; throw error; });
+    }).then(buffer => {
+      if (version !== selectionVersion) return null;
+      audio.music.buffer = buffer; audio.music.loopLen = buffer.duration;
+      return buffer;
+    }).catch(error => {
+      if (version === selectionVersion) { recordingPromise = null; audio.music.rendering = null; }
+      throw error;
+    });
+  }
   return recordingPromise;
+}
+function selectMusic(index) {
+  if (selectedTrack === index && audio.music.buffer) return Promise.resolve(audio.music.buffer);
+  if (selectedTrack === index && audio.music.rendering) return audio.music.rendering;
+  selectedTrack = index; selectionVersion++;
+  stopSource(audio.music); audio.music.buffer = null; audio.music.loopLen = 0;
+  recordingPromise = null;
+  audio.music.rendering = renderMusic();
+  return audio.music.rendering;
+}
+let recordChoiceVersion = 0, selectingRecord = false;
+async function chooseRecord(index) {
+  if (!Number.isInteger(index) || !carousel.items[index]) return false;
+  const request = ++recordChoiceVersion;
+  window.SITE.selectArtist?.(index);
+  audioUnlock();
+  if (selectedTrack === index && isActive()) { selectingRecord = false; return true; }
+  // Raise and park the needle before changing the sleeve or starting a new recording.
+  selectingRecord = true;
+  const ready = selectMusic(index);
+  ready.catch(() => {});
+  stopPlay();
+  if (audio.music.gain) audio.music.gain.gain.setTargetAtTime(0, audio.ctx.currentTime, 0.04);
+  while (state.phase === 'stopping') {
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    if (request !== recordChoiceVersion) return false;
+  }
+  carousel.chosen = index; labelMat.map = carousel.items[index].tex; forceFrames = 3;
+  try { await ready; } catch (e) { if (request === recordChoiceVersion) selectingRecord = false; throw e; }
+  if (request !== recordChoiceVersion || !audio.music.buffer) return false;
+  selectingRecord = false;
+  startPlay();
+  return true;
 }
 function audioUnlock() {                                          // must run inside a user gesture
   if (!audio.ctx) {
@@ -3627,7 +3664,7 @@ function audioStylusDown() {
   audio.music.gain.gain.setValueAtTime(1, audio.ctx.currentTime);
   // Keep the uploaded piano recording free of synthetic vinyl noise.
   if (audio.music.buffer) startSource(audio.music, audio.music.loopLen);
-  else if (audio.music.rendering) audio.music.rendering.then(() => { if (audio.stylus) startSource(audio.music, audio.music.loopLen); });
+  else if (audio.music.rendering) { const version = selectionVersion; audio.music.rendering.then(() => { if (version === selectionVersion && audio.stylus) startSource(audio.music, audio.music.loopLen); }).catch(() => {}); }
 }
 function audioStylusUp() { audio.stylus = false; }
 // render the music loop ahead of time: an OfflineAudioContext needs no user gesture, so the first Play never waits
@@ -4397,12 +4434,15 @@ window.TT = {
     project(i) { const it = carousel.items[i]; if (!it) return null; it.slot.updateMatrixWorld(true); tmpV.setFromMatrixPosition(it.slot.matrixWorld).project(camera); return { x: (tmpV.x + 1) / 2 * canvas.clientWidth, y: (1 - tmpV.y) / 2 * canvas.clientHeight, visible: it.slot.visible }; }
   },
   // the chosen pressing goes onto the platter: its label (same paper relief) and its own render of the loop
+  chooseRecord,
+  get selecting() { return selectingRecord; },
+  get selectedTrack() { return selectedTrack; },
   setRecord(i) {
     const it = carousel.items[i]; if (!it) return false;
     carousel.chosen = i;
     labelMat.map = it.tex; forceFrames = Math.max(forceFrames, 2);
-    // Changing the label preserves the uploaded recording and playback position.
-    if (!audio.music.rendering) audio.music.rendering = renderMusic(44100).catch(err => { console.warn('recording load failed', err); return null; });
+    selectMusic(i).catch(err => { console.warn('recording load failed', err); });
+    window.dispatchEvent(new CustomEvent('lenco-track', { detail: i }));
     return true;
   },
   unlockAudio() { try { audioUnlock(); } catch (e) {} },
@@ -4497,7 +4537,7 @@ start().catch(err => { console.error(err); if (SITE.onError) SITE.onError(err); 
    click on the centred card zooms it (focus). Vertical wheel always belongs to the page. Images: Aura (GPT Image 2.5). */
 import { Renderer, Program, Mesh, Triangle, Plane, Texture, RenderTarget } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/src/index.js';
 
-const RANGE_SRC = {"one": "assets/hd-lbt-188wa.jpg", "mini": "assets/hd-ls-10wd.jpg", "studio": "assets/product-31.jpeg", "float": "assets/hd-lbt-225wa.jpg", "reference": "assets/hd-ls-700bk.jpg", "field": "assets/hd-tt-10bn.jpg"};
+const RANGE_SRC = {"one": "assets/hd-lbt-188wa-opt.webp", "mini": "assets/hd-ls-10wd-opt.webp", "studio": "assets/product-31-opt.webp", "float": "assets/hd-lbt-225wa-opt.webp", "reference": "assets/hd-ls-700bk-opt.webp", "field": "assets/hd-tt-10bn-opt.webp"};
 const ITEMS = [
   { key: 'one', title: 'Lenco LBT-188WA', subtitle: '27.999 TL · KDV dahil', alt: 'Lenco LBT-188WA' },
   { key: 'mini', title: 'Lenco LS-10WD', subtitle: '8.999 TL · KDV dahil', alt: 'Lenco LS-10WD' },
@@ -5040,5 +5080,21 @@ if (el) {
   });
 })();
 </script>
-<script src="catalogue.js?v=20261106"></script></body>
+<script src="catalogue.js?v=20261108"></script><details id="recordPicker"><summary>♫ <span id="trackName">Bill Evans</span> · Plak seç</summary><div class="record-options" aria-label="Sanatçı seçimi"><button type="button" data-track="0" aria-pressed="true"><span class="mini-vinyl" style="--label:#1a1410"></span><span><strong>Bill Evans</strong><small>Peace Piece</small></span></button><button type="button" data-track="1" aria-pressed="false"><span class="mini-vinyl" style="--label:#102333"></span><span><strong>Miles Davis</strong><small>Blue in Green</small></span></button><button type="button" data-track="2" aria-pressed="false"><span class="mini-vinyl" style="--label:#e9dfc9"></span><span><strong>Chet Baker</strong><small>I Fall in Love Too Easily</small></span></button><button type="button" data-track="3" aria-pressed="false"><span class="mini-vinyl" style="--label:#b9843e"></span><span><strong>Art Blakey & The Jazz Messengers</strong><small>Moanin’</small></span></button></div><p id="trackStatus" role="status">Seçim yapılmazsa Bill Evans çalar.</p></details><script>
+(() => {
+ const picker=document.getElementById('recordPicker'),status=document.getElementById('trackStatus');
+ const names=['Bill Evans','Miles Davis','Chet Baker','Art Blakey']; let request=0;
+ const mark=i=>{document.getElementById('trackName').textContent=names[i];picker.querySelectorAll('[data-track]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.track===i)));};
+ picker.addEventListener('click',async e=>{
+  const button=e.target.closest('[data-track]');if(!button)return;
+  const id=++request,index=+button.dataset.track;
+  if(!window.TT?.chooseRecord){status.textContent='Pikap hazırlanıyor; birazdan tekrar seçebilirsiniz.';return;}
+  window.lencoEnableSound();status.textContent='Plak hazırlanıyor…';picker.setAttribute('aria-busy','true');
+  try{const changed=await window.TT.chooseRecord(index);if(id!==request)return;if(changed){mark(index);status.textContent='İğne plağa indiğinde çalacak.';}}
+  catch(e){if(id===request)status.textContent='Parça yüklenemedi. Tekrar seçebilirsiniz.';}
+  finally{if(id===request)picker.removeAttribute('aria-busy');}
+ });
+ window.addEventListener('lenco-track',e=>mark(e.detail));
+})();
+</script></body>
 </html>
